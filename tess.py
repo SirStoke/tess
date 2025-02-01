@@ -3,6 +3,7 @@ import curses
 import chess
 import chess.pgn
 import requests
+import json              # <-- Import json for dumping data
 from io import StringIO
 
 # Example ASCII "shapes" for each piece. 
@@ -274,6 +275,10 @@ def load_random_puzzle():
     response = requests.get(url, timeout=10)
     data = response.json()
 
+    # Dump the entire JSON for debug purposes into "puzzle.json"
+    with open("puzzle.json", "w") as f:
+        json.dump(data, f, indent=2)
+
     puzzle_data = data["puzzle"]
     game_data = data["game"]
 
@@ -331,3 +336,4 @@ if __name__ == "__main__":
         main(pgn_file=sys.argv[1])
     else:
         main()
+
