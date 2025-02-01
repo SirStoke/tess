@@ -294,9 +294,8 @@ def load_random_puzzle():
     # The game.mainline_moves() is a generator of all moves.
     moves = list(game.mainline_moves())
     
-    # Push exactly initial_ply - 1 moves (so that the puzzle starts at move #initialPly).
-    # Also make sure we don't exceed the total length of the PGN.
-    to_push = min(max(initial_ply - 1, 0), len(moves))
+    # Push exactly initial_ply moves (so that the puzzle starts after initialPly half-moves).
+    to_push = min(initial_ply, len(moves))
     for i in range(to_push):
         board.push(moves[i])
 
